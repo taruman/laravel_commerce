@@ -1,5 +1,5 @@
 suites:
     main:
-        namespace: App
-        psr4_prefix: App
+        namespace: TaruCommerce
+        psr4_prefix: TaruCommerce
         src_path: app

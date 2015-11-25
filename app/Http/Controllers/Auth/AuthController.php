@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace TaruCommerce\Http\Controllers\Auth;
 
-use App\User;
+use TaruCommerce\User;
 use Validator;
-use App\Http\Controllers\Controller;
+use TaruCommerce\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
