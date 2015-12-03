@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('admin/categories', ['as' => 'admin.categories', 'uses' => 'AdminCategoriesController@index']);
+Route::get('admin/products', ['as' => 'admin.products', 'uses' => 'AdminProductsController@index']);
