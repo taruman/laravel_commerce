@@ -4,6 +4,7 @@ namespace TaruCommerce\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use TaruCommerce\Http\Requests\ProductRequest;
 use TaruCommerce\Http\Requests;
 use TaruCommerce\Http\Controllers\Controller;
 use TaruCommerce\Product;
@@ -36,7 +37,7 @@ class AdminProductsController extends Controller
      */
     public function create()
     {
-        //
+        return view("products.create");
     }
 
     /**
@@ -45,9 +46,12 @@ class AdminProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+        $input = $request->all();
+        $product = $this->productModel->fill($input);
+        $product->save();
+        return redirect()->route('admin.products');
     }
 
     /**
@@ -69,7 +73,8 @@ class AdminProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = $this->productModel->find($id);
+        return view("products.edit", compact('product'));
     }
 
     /**
@@ -79,9 +84,10 @@ class AdminProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
-        //
+        $this->productModel->find($id)->update($request->all());
+        return redirect()->route("admin.products");
     }
 
     /**
@@ -92,6 +98,7 @@ class AdminProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->productModel->find($id)->delete();
+        return redirect()->route('admin.products');
     }
 }
