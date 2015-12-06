@@ -29,6 +29,7 @@
 					</table>
 				</div>
 			</div>
+			{!! $categories->render() !!}
 		</div>
 	</div>
 </div>

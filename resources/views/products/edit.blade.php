@@ -17,6 +17,10 @@
 				<div class="panel-body">
 					{!! Form::open(['route' => ['admin.products.update', 'id' => $product->id], 'method' => 'put']) !!}
 					<div class="form-group">
+						<label>Categoria</label>
+						{!! Form::select('category_id', $categories, $product->category->id, ['class' => 'form-control']) !!}
+					</div>
+					<div class="form-group">
 						<label>Nome</label>
 						<input class="form-control" type="text" name="name" value="{{$product->name}}">
 					</div>

@@ -12,6 +12,7 @@
 						<tr>
 							<td>ID</td>
 							<td>Nome</td>
+							<td>Categoria</td>
 							<td>Preço</td>
 							<td>Descrição</td>
 							<td>Action</td>
@@ -20,6 +21,7 @@
 						<tr>
 							<td>{{$product->id}}</td>
 							<td>{{$product->name}}</td>
+							<td>{{$product->category->name}}</td>
 							<td>{{$product->price}}</td>
 							<td>{{$product->description}}</td>
 							<td>
@@ -31,6 +33,7 @@
 					</table>
 				</div>
 			</div>
+			{!! $products->render() !!}
 		</div>
 	</div>
 </div>

@@ -17,6 +17,10 @@
 				<div class="panel-body">
 					{!! Form::open(['route' => 'admin.products.store']) !!}
 					<div class="form-group">
+						<label>Categoria</label>
+						{!! Form::select('category_id', $categories, null, ['class' => 'form-control']) !!}
+					</div>
+					<div class="form-group">
 						<label>Nome</label>
 						<input class="form-control" type="text" name="name">
 					</div>

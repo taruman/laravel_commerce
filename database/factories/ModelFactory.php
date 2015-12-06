@@ -31,6 +31,7 @@ $factory->define(TaruCommerce\Product::class, function (Faker\Generator $faker) 
     return [
         'name' => $faker->name,
         'description' => $faker->sentence,
-        'price' => $faker->numberBetween(10, 50)
+        'price' => $faker->numberBetween(10, 50),
+        'category_id' => $faker->numberBetween(1, 10)
     ];
 });
