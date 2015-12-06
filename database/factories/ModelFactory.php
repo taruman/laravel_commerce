@@ -19,3 +19,18 @@ $factory->define(TaruCommerce\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(TaruCommerce\Category::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word,
+        'description' => $faker->sentence
+    ];
+});
+
+$factory->define(TaruCommerce\Product::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'description' => $faker->sentence,
+        'price' => $faker->numberBetween(10, 50)
+    ];
+});
