@@ -5,19 +5,27 @@ namespace TaruCommerce\Http\Controllers;
 use Illuminate\Http\Request;
 
 use TaruCommerce\Http\Requests\ProductRequest;
+use TaruCommerce\Http\Requests\ProductImageRequest;
 use TaruCommerce\Http\Requests;
 use TaruCommerce\Http\Controllers\Controller;
 use TaruCommerce\Product;
+use TaruCommerce\ProductImage;
 use TaruCommerce\Category;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Contracts\Filesystem\Factory as Storage;
 
 class AdminProductsController extends Controller
 {
 
     protected $productModel;
+    private $filesystem;
+    private $storage;
 
-    public function __construct(Product $productModel)
+    public function __construct(Product $productModel, Storage $storage, Filesystem $filesystem)
     {
         $this->productModel = $productModel;
+        $this->storage = $storage;
+        $this->filesystem = $filesystem;
     }
 
     public function index()
@@ -68,5 +76,36 @@ class AdminProductsController extends Controller
     {
         $this->productModel->find($id)->delete();
         return redirect()->route('admin.products');
+    }
+
+    public function images($id)
+    {
+        $product = $this->productModel->find($id);
+        return view('products.images', compact('product'));
+    }
+
+    public function createImage($id)
+    {
+        $product = $this->productModel->find($id);
+        return view('products.create_image', compact('product'));
+    }
+
+    public function storeImage(ProductImageRequest $request, $id)
+    {
+        $file = $request->file('image');
+        $extension = $file->getClientOriginalExtension();
+        $product = $this->productModel->find($id);
+        $image = $product->images()->create(['extension' => $extension]);
+        $this->storage->disk('public_local')->put($image->id.'.'.$extension, $this->filesystem->get($file));
+        return redirect()->route('admin.products.images', ['id' => $id]);
+    }
+
+    public function destroyImage(ProductImage $productImage, $id)
+    {
+        $image = $productImage->find($id);
+        $this->storage->disk('public_local')->delete($image->id.'.'.$image->extension);
+        $product = $image->product;
+        $image->delete();
+        return redirect()->route('admin.products.images', ['id' => $product->id]);
     }
 }
