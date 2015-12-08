@@ -21,7 +21,7 @@
 							<td>{{$category->name}}</td>
 							<td>{{$category->description}}</td>
 							<td>
-								<a href="{{route('admin.categories.destroy', ['id' => $category->id])}}">Delete</a>|
+								<a href="{{route('admin.categories.destroy', ['id' => $category->id])}}">Delete</a> | 
 								<a href="{{route('admin.categories.edit', ['id' => $category->id])}}">Editar</a>
 							</td>
 						</tr>
