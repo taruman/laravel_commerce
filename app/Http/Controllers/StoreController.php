@@ -6,12 +6,27 @@ use Illuminate\Http\Request;
 
 use TaruCommerce\Http\Requests;
 use TaruCommerce\Http\Controllers\Controller;
+use TaruCommerce\Category;
+use TaruCommerce\Product;
 
 class StoreController extends Controller
 {
+
+    private $categoryModel;
+    private $productModel;
+
+    public function __construct(Category $categoryModel, Product $productModel)
+    {
+        $this->categoryModel = $categoryModel;
+        $this->productModel = $productModel;
+    }
+
     public function index()
     {
-        return view('store.index');
+        $fProducts = $this->productModel->featured();
+        $rProducts = $this->productModel->recommended();
+        $categories = $this->categoryModel->get();
+        return view('store.index', compact('categories', 'fProducts', 'rProducts'));
     }
 
     /**
