@@ -32,6 +32,14 @@
 						<label>Descrição</label>
 						<textarea class="form-control" name="description"></textarea>
 					</div>
+					<div class="form-group">
+						<label>Recomendado</label>
+						{!! Form::select('recommended', [1 => 'SIM', 0 => 'NÃO'], null, ['class' => 'form-control']) !!}
+					</div>
+					<div class="form-group">
+						<label>Destaque</label>
+						{!! Form::select('featured', [1 => 'SIM', 0 => 'NÃO'], null, ['class' => 'form-control']) !!}
+					</div>
 					<input type="submit" class="btn btn-default btn-block" value="Cadastrar">
 					{!! Form::close() !!}
 				</div>
