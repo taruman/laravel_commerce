@@ -33,6 +33,10 @@
 						<textarea class="form-control" name="description">{{$product->description}}</textarea>
 					</div>
 					<div class="form-group">
+						<label>Tags</label>
+						<input class="form-control" type="text" name="tags" value="{{$tags}}">
+					</div>
+					<div class="form-group">
 						<label>Recomendado</label>
 						{!! Form::select('recommended', ['1' => 'SIM', '0' => 'NÃO'], $product->recommended, ['class' => 'form-control']) !!}
 					</div>

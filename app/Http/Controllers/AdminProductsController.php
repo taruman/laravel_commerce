@@ -45,6 +45,7 @@ class AdminProductsController extends Controller
         $input = $request->all();
         $product = $this->productModel->fill($input);
         $product->save();
+        $product->setTags($input['tags']);
         return redirect()->route('admin.products');
     }
 
@@ -63,12 +64,17 @@ class AdminProductsController extends Controller
     {
         $categories = $categoryModel->lists('name', 'id');
         $product = $this->productModel->find($id);
-        return view("products.edit", compact('product', 'categories'));
+        $t = $product->tags;
+        $tags = $t->implode('name', ',');
+        return view("products.edit", compact('product', 'categories', 'tags'));
     }
 
     public function update(ProductRequest $request, $id)
     {
-        $this->productModel->find($id)->update($request->all());
+        $product = $this->productModel->find($id);
+        $product->update($request->all());
+        $product->setTags($request->tags);
+
         return redirect()->route("admin.products");
     }
 
