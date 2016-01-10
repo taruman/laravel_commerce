@@ -11,6 +11,7 @@ use TaruCommerce\Http\Controllers\Controller;
 use TaruCommerce\Product;
 use TaruCommerce\ProductImage;
 use TaruCommerce\Category;
+use TaruCommerce\Tag;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Contracts\Filesystem\Factory as Storage;
 
@@ -40,12 +41,12 @@ class AdminProductsController extends Controller
         return view("products.create", compact('categories'));
     }
 
-    public function store(ProductRequest $request)
+    public function store(ProductRequest $request, Tag $tagModel)
     {
         $input = $request->all();
         $product = $this->productModel->fill($input);
         $product->save();
-        $product->setTags($input['tags']);
+        $tagModel->setTags($input['tags'], $product->id);
         return redirect()->route('admin.products');
     }
 
@@ -69,11 +70,11 @@ class AdminProductsController extends Controller
         return view("products.edit", compact('product', 'categories', 'tags'));
     }
 
-    public function update(ProductRequest $request, $id)
+    public function update(ProductRequest $request, Tag $tagModel, $id)
     {
         $product = $this->productModel->find($id);
         $product->update($request->all());
-        $product->setTags($request->tags);
+        $tagModel->updateTags($request->tags, $product);
 
         return redirect()->route("admin.products");
     }

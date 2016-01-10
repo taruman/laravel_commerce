@@ -34,11 +34,4 @@ class Product extends Model
         return $query->where('recommended', '=', 1)->get();
     }
 
-    public function scopeSetTags($query, $input)
-    {
-        $tags = explode(",", $input);
-        foreach ($tags as $tag) {
-            $this->tags()->firstOrCreate(array("name" => $tag));
-        }
-    }
 }
