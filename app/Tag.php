@@ -20,6 +20,7 @@ class Tag extends Model
     {
         $tags = explode(",", $input);
         foreach ($tags as $tag) {
+            $tag = trim($tag);
             $tag = $this->firstOrCreate(array("name" => $tag));
             $tag->products()->attach($product_id);
         }
@@ -30,6 +31,7 @@ class Tag extends Model
         $tags = explode(",", $input);
         $ids = [];
         foreach ($tags as $tag) {
+            $tag = trim($tag);
             $tag = $this->firstOrCreate(array("name" => $tag));
             $ids[] = $tag->id; 
         }
