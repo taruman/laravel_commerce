@@ -108,12 +108,9 @@
 	<div class="container">
 		<div class="row">
 
-			@yield('categories')
+            @yield('categories')
 
-			<div class="col-sm-9 padding-right">
-
-			@yield('features')
-			@yield('recommended')
+            @yield('content')
 
 			</div>
 

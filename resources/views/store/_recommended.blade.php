@@ -1,5 +1,3 @@
-<div class="features_items"><!--recommended-->
-    <h2 class="title text-center">Recomendados</h2>
     @foreach($rProducts as $product)
     <div class="col-sm-4">
         <div class="product-image-wrapper">
@@ -31,4 +29,3 @@
         </div>
     </div>
     @endforeach
-</div><!--recommended-->

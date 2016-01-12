@@ -1,6 +1,3 @@
-
-<div class="features_items"><!--features_items-->
-    <h2 class="title text-center">Em destaque</h2>
     @foreach($fProducts as $product)
     <div class="col-sm-4">
         <div class="product-image-wrapper">
@@ -32,4 +29,3 @@
         </div>
     </div>
     @endforeach
-</div><!--features_items-->
